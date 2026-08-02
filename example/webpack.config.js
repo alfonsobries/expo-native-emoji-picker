@@ -6,7 +6,7 @@ module.exports = async (env, argv) => {
     {
       ...env,
       babel: {
-        dangerouslyAddModulePathsToTranspile: ['expo-ios-emoji-picker'],
+        dangerouslyAddModulePathsToTranspile: ['expo-native-emoji-picker'],
       },
     },
     argv

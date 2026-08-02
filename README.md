@@ -1,10 +1,10 @@
-# expo-ios-emoji-picker
+# expo-native-emoji-picker
 
-[![npm version](https://img.shields.io/npm/v/expo-ios-emoji-picker.svg)](https://www.npmjs.com/package/expo-ios-emoji-picker)
-[![CI](https://github.com/alfonsobries/expo-ios-emoji-picker/actions/workflows/ci.yml/badge.svg)](https://github.com/alfonsobries/expo-ios-emoji-picker/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/expo-ios-emoji-picker.svg)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/expo-native-emoji-picker.svg)](https://www.npmjs.com/package/expo-native-emoji-picker)
+[![CI](https://github.com/alfonsobries/expo-native-emoji-picker/actions/workflows/ci.yml/badge.svg)](https://github.com/alfonsobries/expo-native-emoji-picker/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/expo-native-emoji-picker.svg)](./LICENSE)
 
-Native iOS emoji picker for Expo and React Native. Opens the **system emoji keyboard** — the emoji-only panel Apple's Reminders uses, with Apple's own search and skin-tone selector — from any trigger, and resolves with the picked emoji.
+Native emoji picker for Expo and React Native, on **iOS and Android**. Opens the system's own emoji UI — Apple's emoji keyboard, Google's emoji grid — from any trigger, and resolves with the picked emoji.
 
 <p align="center">
   <picture>
@@ -13,23 +13,44 @@ Native iOS emoji picker for Expo and React Native. Opens the **system emoji keyb
   </picture>
 </p>
 
-- 🍎 **Real native keyboard** — Apple's emoji panel, not a JS re-implementation. Search, skin tones, and new emoji land with each iOS release, for free.
-- 🌎 **Localized by default** — the keyboard, its search, and the dismiss button follow the device language automatically.
+<p align="center">
+  <em>iOS: Apple's emoji keyboard.</em>
+</p>
+
+<p align="center">
+  <img src="docs/android-sheet.png" alt="Android bottom sheet with Google's emoji grid, category tabs and recents" width="400">
+</p>
+
+<p align="center">
+  <em>Android: Google's emoji grid in a bottom sheet, where the keyboard would be.</em>
+</p>
+
+- 🍎 **Apple's emoji keyboard on iOS** — the emoji-only panel Reminders uses, not a JS re-implementation. Search, skin tones, and new emoji land with each iOS release, for free.
+- 🤖 **Google's emoji grid on Android** — `androidx.emoji2:emoji2-emojipicker`, the component the platform ships, in a bottom sheet where the keyboard would be. Categories, recents and skin-tone variants included.
+- 🌎 **Localized by default** — both follow the device language automatically.
 - 🎯 **Headless** — trigger it from any button, tile, or gesture; there's no UI to style.
-- ⌨️ **Keyboard mode** — keep it open and stream picks live, backspace included.
-- 🪶 **Zero dependencies.**
+- ⌨️ **Keyboard mode** — keep it open and stream picks live.
+- 🪶 **No JavaScript dependencies.**
 
 ## Requirements
 
-- iOS 16+
+- iOS 16+ / Android 7+ (API 24)
 - Expo SDK 52+ with a [development build](https://docs.expo.dev/develop/development-builds/introduction/) or a bare React Native app with Expo Modules — this package includes native code, so it does **not** run in Expo Go.
 
-On Android and web the helpers resolve `null` / `[]` so cross-platform code doesn't need guards.
+On web the helpers resolve `null` / `[]` so cross-platform code doesn't need guards.
+
+## Platform differences
+
+|            | iOS                                                                                                                 | Android                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| What opens | The system emoji keyboard                                                                                           | A bottom sheet with Google's emoji grid                                                           |
+| `onDelete` | Fires on backspace                                                                                                  | Never — the grid has no backspace, and inventing one would be a control the platform doesn't have |
+| `colors`   | Ignored: the picker _is_ the system keyboard, and repainting it is the one thing that would make it look non-native | `background` paints the sheet                                                                     |
 
 ## Installation
 
 ```sh
-npx expo install expo-ios-emoji-picker
+npx expo install expo-native-emoji-picker
 ```
 
 Then rebuild your development build (`npx expo run:ios` or an EAS build). If you manage OTA updates with a fixed `runtimeVersion`, adding this package is a native change — bump it.
@@ -39,7 +60,7 @@ Then rebuild your development build (`npx expo run:ios` or an EAS build). If you
 ### Pick a single emoji
 
 ```tsx
-import { pickEmoji } from 'expo-ios-emoji-picker';
+import { pickEmoji } from 'expo-native-emoji-picker';
 
 const emoji = await pickEmoji();
 if (emoji) {
@@ -52,7 +73,7 @@ if (emoji) {
 The keyboard stays open: every tap streams through `onPick`, the keyboard's backspace fires `onDelete`, and dismissing it resolves with everything picked.
 
 ```tsx
-import { pickEmojis } from 'expo-ios-emoji-picker';
+import { pickEmojis } from 'expo-native-emoji-picker';
 
 const all = await pickEmojis({
   cancelLabel: 'Done',
@@ -84,19 +105,19 @@ Opens the emoji keyboard and resolves with the tapped emoji, or `null` when dism
 
 Opens the emoji keyboard in keyboard mode and resolves with every picked emoji once dismissed. Accepts two extra callbacks:
 
-| Option     | Type                      | Description                                              |
-| ---------- | ------------------------- | -------------------------------------------------------- |
-| `onPick`   | `(emoji: string) => void` | Fires live for each tap while the keyboard stays open.   |
+| Option     | Type                      | Description                                                |
+| ---------- | ------------------------- | ---------------------------------------------------------- |
+| `onPick`   | `(emoji: string) => void` | Fires live for each tap while the keyboard stays open.     |
 | `onDelete` | `() => void`              | Fires when the keyboard's backspace removes the last pick. |
 
 ### `EmojiPickerOptions`
 
-| Option                | Type      | Default            | Description                                                            |
-| --------------------- | --------- | ------------------ | ---------------------------------------------------------------------- |
-| `cancelLabel`         | `string`  | system Cancel item | Dismiss button label. The default is localized by iOS automatically.   |
-| `showCancelButton`    | `boolean` | `true`             | Show the dismiss button above the keyboard.                            |
-| `backdropOpacity`     | `number`  | `0.15`             | Opacity of the dim behind the keyboard, `0`–`1`.                       |
-| `dismissOnTapOutside` | `boolean` | `true`             | Whether tapping the dim dismisses the picker.                          |
+| Option                | Type      | Default            | Description                                                          |
+| --------------------- | --------- | ------------------ | -------------------------------------------------------------------- |
+| `cancelLabel`         | `string`  | system Cancel item | Dismiss button label. The default is localized by iOS automatically. |
+| `showCancelButton`    | `boolean` | `true`             | Show the dismiss button above the keyboard.                          |
+| `backdropOpacity`     | `number`  | `0.15`             | Opacity of the dim behind the keyboard, `0`–`1`.                     |
+| `dismissOnTapOutside` | `boolean` | `true`             | Whether tapping the dim dismisses the picker.                        |
 
 Skin tones (long-press) and ZWJ sequences (e.g. 👨‍👩‍👧‍👦) arrive as a single string.
 

@@ -1,7 +1,11 @@
-import { EmojiPickerOptions, PickEmojisOptions } from './ExpoIosEmojiPicker.types';
-import ExpoIosEmojiPickerModule from './ExpoIosEmojiPickerModule';
+import { EmojiPickerOptions, PickEmojisOptions } from './ExpoNativeEmojiPicker.types';
+import ExpoNativeEmojiPickerModule from './ExpoNativeEmojiPickerModule';
 
-export type { EmojiPickerOptions, PickEmojisOptions } from './ExpoIosEmojiPicker.types';
+export type {
+  EmojiPickerColors,
+  EmojiPickerOptions,
+  PickEmojisOptions,
+} from './ExpoNativeEmojiPicker.types';
 
 /**
  * Opens the native iOS emoji keyboard (the emoji-only panel Reminders uses)
@@ -10,10 +14,10 @@ export type { EmojiPickerOptions, PickEmojisOptions } from './ExpoIosEmojiPicker
  * platforms without the native implementation.
  */
 export async function pickEmoji(options: EmojiPickerOptions = {}): Promise<string | null> {
-  if (!ExpoIosEmojiPickerModule) {
+  if (!ExpoNativeEmojiPickerModule) {
     return null;
   }
-  const result = await ExpoIosEmojiPickerModule.presentAsync(options);
+  const result = await ExpoNativeEmojiPickerModule.presentAsync(options);
   return typeof result === 'string' ? result : null;
 }
 
@@ -25,19 +29,19 @@ export async function pickEmoji(options: EmojiPickerOptions = {}): Promise<strin
  */
 export async function pickEmojis(options: PickEmojisOptions = {}): Promise<string[]> {
   const { onPick, onDelete, ...rest } = options;
-  if (!ExpoIosEmojiPickerModule) {
+  if (!ExpoNativeEmojiPickerModule) {
     return [];
   }
 
   const pickSubscription = onPick
-    ? ExpoIosEmojiPickerModule.addListener('onPick', (event) => onPick(event.emoji))
+    ? ExpoNativeEmojiPickerModule.addListener('onPick', (event) => onPick(event.emoji))
     : null;
   const deleteSubscription = onDelete
-    ? ExpoIosEmojiPickerModule.addListener('onDelete', onDelete)
+    ? ExpoNativeEmojiPickerModule.addListener('onDelete', onDelete)
     : null;
 
   try {
-    const result = await ExpoIosEmojiPickerModule.presentAsync({ ...rest, multiple: true });
+    const result = await ExpoNativeEmojiPickerModule.presentAsync({ ...rest, multiple: true });
     return Array.isArray(result) ? result : [];
   } finally {
     pickSubscription?.remove();
