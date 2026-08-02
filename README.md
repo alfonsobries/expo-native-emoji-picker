@@ -13,6 +13,18 @@ Native emoji picker for Expo and React Native, on **iOS and Android**. Opens the
   </picture>
 </p>
 
+<p align="center">
+  <em>iOS: Apple's emoji keyboard.</em>
+</p>
+
+<p align="center">
+  <img src="docs/android-sheet.png" alt="Android bottom sheet with Google's emoji grid, category tabs and recents" width="400">
+</p>
+
+<p align="center">
+  <em>Android: Google's emoji grid in a bottom sheet, where the keyboard would be.</em>
+</p>
+
 - 🍎 **Apple's emoji keyboard on iOS** — the emoji-only panel Reminders uses, not a JS re-implementation. Search, skin tones, and new emoji land with each iOS release, for free.
 - 🤖 **Google's emoji grid on Android** — `androidx.emoji2:emoji2-emojipicker`, the component the platform ships, in a bottom sheet where the keyboard would be. Categories, recents and skin-tone variants included.
 - 🌎 **Localized by default** — both follow the device language automatically.
