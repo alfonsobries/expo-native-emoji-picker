@@ -20,7 +20,7 @@ config.resolver.nodeModulesPaths = [
 ];
 
 config.resolver.extraNodeModules = {
-  'expo-ios-emoji-picker': '..',
+  'expo-native-emoji-picker': '..',
 };
 
 config.watchFolders = [path.resolve(__dirname, '..')];

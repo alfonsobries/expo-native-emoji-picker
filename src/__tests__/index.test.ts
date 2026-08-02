@@ -3,7 +3,7 @@ import { pickEmoji, pickEmojis } from '../index';
 const mockPresentAsync = jest.fn();
 const mockAddListener = jest.fn();
 
-jest.mock('../ExpoIosEmojiPickerModule', () => ({
+jest.mock('../ExpoNativeEmojiPickerModule', () => ({
   __esModule: true,
   get default() {
     return { presentAsync: mockPresentAsync, addListener: mockAddListener };

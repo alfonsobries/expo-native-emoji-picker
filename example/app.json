@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-ios-emoji-picker-example",
-    "slug": "expo-ios-emoji-picker-example",
+    "name": "expo-native-emoji-picker-example",
+    "slug": "expo-native-emoji-picker-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -12,11 +12,11 @@ struct PresentOptions: Record {
   @Field var multiple: Bool = false
 }
 
-public class ExpoIosEmojiPickerModule: Module {
+public class ExpoNativeEmojiPickerModule: Module {
   private var picker: EmojiKeyboardPicker?
 
   public func definition() -> ModuleDefinition {
-    Name("ExpoIosEmojiPicker")
+    Name("ExpoNativeEmojiPicker")
 
     Events("onPick", "onDelete")
 

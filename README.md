@@ -1,8 +1,8 @@
-# expo-ios-emoji-picker
+# expo-native-emoji-picker
 
-[![npm version](https://img.shields.io/npm/v/expo-ios-emoji-picker.svg)](https://www.npmjs.com/package/expo-ios-emoji-picker)
-[![CI](https://github.com/alfonsobries/expo-ios-emoji-picker/actions/workflows/ci.yml/badge.svg)](https://github.com/alfonsobries/expo-ios-emoji-picker/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/expo-ios-emoji-picker.svg)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/expo-native-emoji-picker.svg)](https://www.npmjs.com/package/expo-native-emoji-picker)
+[![CI](https://github.com/alfonsobries/expo-native-emoji-picker/actions/workflows/ci.yml/badge.svg)](https://github.com/alfonsobries/expo-native-emoji-picker/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/expo-native-emoji-picker.svg)](./LICENSE)
 
 Native iOS emoji picker for Expo and React Native. Opens the **system emoji keyboard** — the emoji-only panel Apple's Reminders uses, with Apple's own search and skin-tone selector — from any trigger, and resolves with the picked emoji.
 
@@ -29,7 +29,7 @@ On Android and web the helpers resolve `null` / `[]` so cross-platform code does
 ## Installation
 
 ```sh
-npx expo install expo-ios-emoji-picker
+npx expo install expo-native-emoji-picker
 ```
 
 Then rebuild your development build (`npx expo run:ios` or an EAS build). If you manage OTA updates with a fixed `runtimeVersion`, adding this package is a native change — bump it.
@@ -39,7 +39,7 @@ Then rebuild your development build (`npx expo run:ios` or an EAS build). If you
 ### Pick a single emoji
 
 ```tsx
-import { pickEmoji } from 'expo-ios-emoji-picker';
+import { pickEmoji } from 'expo-native-emoji-picker';
 
 const emoji = await pickEmoji();
 if (emoji) {
@@ -52,7 +52,7 @@ if (emoji) {
 The keyboard stays open: every tap streams through `onPick`, the keyboard's backspace fires `onDelete`, and dismissing it resolves with everything picked.
 
 ```tsx
-import { pickEmojis } from 'expo-ios-emoji-picker';
+import { pickEmojis } from 'expo-native-emoji-picker';
 
 const all = await pickEmojis({
   cancelLabel: 'Done',

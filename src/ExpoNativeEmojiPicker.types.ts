@@ -10,6 +10,19 @@ export type EmojiPickerOptions = {
   backdropOpacity?: number;
   /** Whether tapping outside the keyboard dismisses the picker. Defaults to true. */
   dismissOnTapOutside?: boolean;
+  /**
+   * Colors for the sheet, so it can wear a design system instead of the
+   * platform default. Any CSS-style hex string.
+   *
+   * Android only: on iOS the picker *is* the system emoji keyboard, and
+   * repainting it is the one thing that would make it look non-native.
+   */
+  colors?: EmojiPickerColors;
+};
+
+export type EmojiPickerColors = {
+  /** Sheet background behind the grid. */
+  background?: string;
 };
 
 export type PickEmojisOptions = EmojiPickerOptions & {
@@ -19,7 +32,7 @@ export type PickEmojisOptions = EmojiPickerOptions & {
   onDelete?: () => void;
 };
 
-export type ExpoIosEmojiPickerModuleEvents = {
+export type ExpoNativeEmojiPickerModuleEvents = {
   onPick: (event: { emoji: string }) => void;
   onDelete: () => void;
 };

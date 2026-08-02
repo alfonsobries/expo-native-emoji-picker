@@ -1,4 +1,4 @@
-import { pickEmoji, pickEmojis } from 'expo-ios-emoji-picker';
+import { pickEmoji, pickEmojis } from 'expo-native-emoji-picker';
 import { useState } from 'react';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>expo-ios-emoji-picker</Text>
+        <Text style={styles.header}>expo-native-emoji-picker</Text>
 
         <Group name="Single pick">
           <Button

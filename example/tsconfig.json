@@ -3,8 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "expo-ios-emoji-picker": ["../src/index"],
-      "expo-ios-emoji-picker/*": ["../src/*"]
+      "expo-native-emoji-picker": ["../src/index"],
+      "expo-native-emoji-picker/*": ["../src/*"]
     }
   }
 }
