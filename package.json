@@ -1,6 +1,6 @@
 {
   "name": "expo-native-emoji-picker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Native iOS emoji picker for Expo — opens the system emoji keyboard and resolves with the picked emoji",
   "main": "build/index.js",
   "types": "build/index.d.ts",
